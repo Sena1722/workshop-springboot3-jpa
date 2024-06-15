@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,9 +17,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -29,8 +29,10 @@ public class User implements Serializable{
 	private String password;
 	
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "client")
-	private List<Order> ordes = new ArrayList<>();
+	private List<Order> orders = new ArrayList<>();
+	
 	public User() {}
 
 	public User(Long id, String name, String email, String phone, String password) {
@@ -84,8 +86,8 @@ public class User implements Serializable{
 		this.password = password;
 	}
 	
-	public List<Order> getOrdes() {
-		return ordes;
+	public List<Order> getOrders() {
+		return orders;
 	}
 
 	@Override
